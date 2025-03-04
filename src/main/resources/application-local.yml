@@ -1,0 +1,54 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  kafka:
+    bootstrap-servers: localhost:29092
+
+    security:
+      protocol: SSL
+
+    ssl:
+      key-store-location: file:conf/keystore.jks
+      key-store-password: password
+      key-password: password
+      trust-store-location: file:conf/truststore.jks
+      trust-store-password: password
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+
+    streams:
+      application-id: order
+      state-store-cache-max-size: 0
+      properties:
+        default:
+          deserialization:
+            exception:
+              handler: org.apache.kafka.streams.errors.LogAndContinueExceptionHandler
+
+    properties:
+      schema:
+        registry:
+          url: localhost:9098
+          ssl:
+            keystore:
+              location: conf/keystore.jks
+              password: password
+            truststore:
+              location: conf/truststore.jks
+              password: password
+            key:
+              password: password
+
+
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost:28017/order_db
+
+logging:
+  level:
+    web: debug
+    sql: debug

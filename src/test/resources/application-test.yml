@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: order
+
+  kafka:
+    streams:
+      application-id: order-group
+    bootstrap-servers: localhost:9092
+
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost:28017/order_db
