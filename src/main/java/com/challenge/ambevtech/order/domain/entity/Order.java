@@ -24,7 +24,7 @@ public class Order {
     private UUID id;
     private String name;
     private Integer quantity;
-    private BigDecimal price;
+    private Double price;
     private BigDecimal total;
 
     @CreatedDate

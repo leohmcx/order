@@ -6,16 +6,6 @@ spring:
   kafka:
     bootstrap-servers: localhost:29092
 
-    security:
-      protocol: SSL
-
-    ssl:
-      key-store-location: file:conf/keystore.jks
-      key-store-password: password
-      key-password: password
-      trust-store-location: file:conf/truststore.jks
-      trust-store-password: password
-
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
@@ -28,21 +18,6 @@ spring:
           deserialization:
             exception:
               handler: org.apache.kafka.streams.errors.LogAndContinueExceptionHandler
-
-    properties:
-      schema:
-        registry:
-          url: localhost:9098
-          ssl:
-            keystore:
-              location: conf/keystore.jks
-              password: password
-            truststore:
-              location: conf/truststore.jks
-              password: password
-            key:
-              password: password
-
 
   data:
     mongodb:

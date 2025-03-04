@@ -21,14 +21,13 @@ public class OrderProcessor {
     private static final String ORDER_TOPIC_OUTPUT = "order-topic-output";
 
     private OrderService orderService;
-    private SchemaRegistryConfig schemaRegistryConfig;
 
     @Autowired
     void buildPipeline(StreamsBuilder streamsBuilder) {
         KTable<String, OrderEvent> orders = streamsBuilder
-                .table(ORDER_TOPIC_INPUT, Consumed.with(Serdes.String(), order()))
-                .filter((key, order) -> order.getPrice() > ZERO.intValue()
-                        && order.getQuantity() > ZERO.intValue());
+                .table(ORDER_TOPIC_INPUT, Consumed.with(Serdes.String(), order()));
+        //.filter((key, order) -> order.getPrice() > ZERO.intValue()
+          //              && order.getQuantity() > ZERO.intValue());
 
         orders.toStream()
                 .peek((key, order) -> orderService.run(order))
@@ -36,9 +35,6 @@ public class OrderProcessor {
     }
 
     public Serde<OrderEvent> order() {
-        SpecificAvroSerde<OrderEvent> rv = new SpecificAvroSerde<>();
-        rv.configure(schemaRegistryConfig.buildPropertiesMap(), false);
-
-        return rv;
+        return new SpecificAvroSerde<>();
     }
 }

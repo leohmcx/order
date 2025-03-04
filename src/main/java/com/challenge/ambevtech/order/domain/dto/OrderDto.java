@@ -6,5 +6,5 @@ import java.util.UUID;
 public record OrderDto(UUID id,
                        String name,
                        Integer quantity,
-                       BigDecimal price) {
+                       Double price) {
 }

@@ -1,12 +1,24 @@
 {
-  "type" : "record",
-  "name" : "OrderEvent",
-  "namespace" : "com.challenge.ambevtech.kafka",
-  "fields" : [
-          { "name" : "id", "type" : "string" },
-          { "name" : "name", "type" : "string" },
-          { "name" : "quantity", "type" : "int" },
-          { "name" : "price", "type" : "double" }
-        ]
+  "type": "record",
+  "name": "OrderEvent",
+  "namespace": "com.challenge.ambevtech.kafka",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "quantity",
+      "type": "int"
+    },
+    {
+      "name": "price",
+      "type": "double"
+    }
+  ]
 }
 

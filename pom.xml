@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>21</java.version>
-		<avro.version>1.11.0</avro.version>
+		<avro.version>1.11.4</avro.version>
 		<org.mapstruct.version>1.6.3</org.mapstruct.version>
 	</properties>
 
@@ -100,13 +100,13 @@
 				<configuration>
 					<annotationProcessorPaths>
 						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</path>
+						<path>
 							<groupId>org.mapstruct</groupId>
 							<artifactId>mapstruct-processor</artifactId>
 							<version>${org.mapstruct.version}</version>
-						</path>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>

@@ -2,7 +2,8 @@ package com.challenge.ambevtech.order.service;
 
 import com.challenge.ambevtech.kafka.OrderEvent;
 import com.challenge.ambevtech.order.domain.dto.OrderDto;
-import com.challenge.ambevtech.order.mapper.OrderEventMapper;
+import com.challenge.ambevtech.order.mapper.OrderMapper;
+import com.challenge.ambevtech.order.mapper.OrderMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -19,12 +20,12 @@ public class OrderProducer {
 
     private static final String ORDER_TOPIC_INPUT = "order-topic-input";
 
-    private final OrderEventMapper orderEventMapper;
+    private final OrderMapper orderMapper;
     private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
 
     @Async
     public CompletableFuture<SendResult<String, OrderEvent>> produceOrder(OrderDto orderDto) {
-        return kafkaTemplate.send(MessageBuilder.withPayload(orderEventMapper.toEntity(orderDto))
+        return kafkaTemplate.send(MessageBuilder.withPayload(orderMapper.toEvent(orderDto))
                 .setHeader(KafkaHeaders.KEY, orderDto.id())
                 .setHeader(KafkaHeaders.TOPIC, ORDER_TOPIC_INPUT)
                 .build());
